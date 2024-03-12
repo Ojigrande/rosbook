@@ -1,0 +1,39 @@
+{
+  "image": "myros:1",
+  //"workspaceFolder": "/ros",
+  "workspaceFolder": "/opt/rosbook",
+  "workspaceMount": "source=/home/alexander/Develop/ROS/rosbook/testros,target=/ros,type=bind,consistency=cached",
+  //"workspaceMount": "source=/home/alexander/Develop/ROS/Book/bookros2_ws,target=/ros,type=bind,consistency=cached",
+//  "initializeCommand": "/home/alexander/ar13-work/ll.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python", "ms-toolsai.jupyter",
+        "ms-vscode.cpptools", "ms-vscode.cmake-tools", "twxs.cmake",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "containerEnv": {
+//      "PYTHONPATH": "/opt/src",
+//      "RECEIVING_DIR": "/doedu_data/receiving-bay"
+//    "DISPLAY": "localhost:10.0",                                  //for X11
+//    "LIBGL_ALWAYS_INDIRECT": "${localEnv:LIBGL_ALWAYS_INDIRECT}", //for X11
+    "XAUTHORITY": "/tmp/.docker.xauth",
+    "QT_X11_NO_MITSHM": "1"
+  },
+  "mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=/tmp/.docker.xauth,target=/tmp/.docker.xauth,type=bind",
+    "source=${localEnv:HOME}/.ssh,target=/home/doedu/.ssh,type=bind",
+//    "source=/mnt/doedu_ssd/doedu_data/,target=/doedu_data,type=bind"
+  ],
+  "runArgs":["--net=host", "--privileged", "--ipc=host",
+             "--runtime=nvidia", "--gpus", "all",
+             "--ulimit", "memlock=-1", 
+             "--ulimit", "stack=67108864"
+//            "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
+//            "-e", "DISPLAY=localhost:15.0",
+//             "-u", "1000"
+  ]
+}

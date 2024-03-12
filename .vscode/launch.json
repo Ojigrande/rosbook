@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: processing",
+      "type": "debugpy",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+//      "program": "processing/dbprocessing.py", "args": ["2023_07_12_16_30_22"],    // 2023_07_12_16_13_43 
+      "program": "tests/fix-db-nan.py", "args": [],
+      "env": {
+        //"PYTHONPATH": "${workspaceFolder}/external/center",
+      }
+      //"jinja": true,
+      //"justMyCode": true
+    }
+  ]
+}
