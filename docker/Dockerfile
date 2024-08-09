@@ -1,17 +1,18 @@
 FROM ros:humble
 
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 ENV TZ=Europe/Moscow
 
-ENV ROS_DISTRO humble
+ENV ROS_DISTRO=humble
 ARG USER_ID
 ARG GROUP_ID
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
-  git
+  git wget mc
+
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-humble-demo-nodes-cpp \
@@ -32,6 +33,8 @@ RUN cd /opt/rosbook && \
     . /opt/ros/humble/setup.sh && \
     colcon build --symlink-install
 
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /root/setup.bash && \
+    echo "source /root/setup.bash" >> /root/.bashrc
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
